@@ -10,23 +10,23 @@ export default function Home() {
 
   const heroImages = [
     {
-      src: "https://images.unsplash.com/photo-1606914501449-5a96b6ce24ca?auto=format&fit=crop&w=2000&q=80",
+      src: "https://source.unsplash.com/random/2000x1200/?warehouse",
       alt: "Moderno skladište sa organizovanim policama"
     },
     {
-      src: "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=2000&q=80",
+      src: "https://source.unsplash.com/random/2000x1200/?restaurant",
       alt: "Elegantan enterijer restorana"
     },
     {
-      src: "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=2000&q=80",
+      src: "https://source.unsplash.com/random/2000x1200/?food",
       alt: "Aranžman svežih namirnica"
     },
     {
-      src: "https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&w=2000&q=80",
+      src: "https://source.unsplash.com/random/2000x1200/?chef",
       alt: "Profesionalni kuvar u komercijalnoj kuhinji"
     },
     {
-      src: "https://images.unsplash.com/photo-1516211697506-8360dbcfe9a4?auto=format&fit=crop&w=2000&q=80",
+      src: "https://source.unsplash.com/random/2000x1200/?food-factory",
       alt: "Moderno postrojenje za preradu hrane"
     }
   ];
@@ -92,17 +92,17 @@ export default function Home() {
               {
                 title: 'Premium Kvalitet',
                 description: 'Nabavljeno od proverenih dobavljača širom sveta',
-                image: 'https://picsum.photos/id/292/400/300',
+                image: 'https://source.unsplash.com/random/400x300/?quality-food',
               },
               {
                 title: 'Brza Dostava',
                 description: 'Dostava istog dana za lokalne porudžbine',
-                image: 'https://picsum.photos/id/294/400/300',
+                image: 'https://source.unsplash.com/random/400x300/?delivery',
               },
               {
                 title: 'Stručna Podrška',
                 description: '24/7 korisnička podrška za naše partnere',
-                image: 'https://picsum.photos/id/296/400/300',
+                image: 'https://source.unsplash.com/random/400x300/?customer-service',
               },
             ].map((card, index) => (
               <div
@@ -139,19 +139,19 @@ export default function Home() {
             {[
               {
                 title: 'Sveža Riba',
-                image: 'https://picsum.photos/id/139/400/300',
+                image: 'https://source.unsplash.com/random/400x300/?fresh-fish',
               },
               {
                 title: 'Sushi Kvalitet',
-                image: 'https://picsum.photos/id/140/400/300',
+                image: 'https://source.unsplash.com/random/400x300/?sushi',
               },
               {
                 title: 'Morski Plodovi',
-                image: 'https://picsum.photos/id/141/400/300',
+                image: 'https://source.unsplash.com/random/400x300/?seafood',
               },
               {
                 title: 'Specijalni Proizvodi',
-                image: 'https://picsum.photos/id/142/400/300',
+                image: 'https://source.unsplash.com/random/400x300/?specialty-food',
               },
             ].map((category, index) => (
               <Link
