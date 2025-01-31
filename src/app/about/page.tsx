@@ -31,19 +31,19 @@ const team = [
   {
     name: 'John Smith',
     role: 'CEO & Founder',
-    image: 'https://picsum.photos/id/1005/400/400',
+    image: 'https://picsum.photos/id/1025/400/400',
     bio: 'With over 20 years in the food industry, John leads our vision for excellence.',
   },
   {
     name: 'Sarah Johnson',
     role: 'Operations Director',
-    image: 'https://picsum.photos/id/1011/400/400',
+    image: 'https://picsum.photos/id/1027/400/400',
     bio: 'Sarah ensures smooth operations and maintains our high quality standards.',
   },
   {
     name: 'Michael Chen',
     role: 'Head of Sourcing',
-    image: 'https://picsum.photos/id/1012/400/400',
+    image: 'https://picsum.photos/id/1074/400/400',
     bio: 'Michael builds relationships with suppliers worldwide to bring you the best products.',
   },
 ]
@@ -61,11 +61,12 @@ export default function AboutPage() {
       {/* Hero Section */}
       <section className="relative h-[400px] w-full">
         <Image
-          src="https://picsum.photos/id/1043/1920/1080"
+          src="https://picsum.photos/id/425/1920/1080"
           alt="About Primaventa"
           fill
           className="object-cover"
           priority
+          sizes="100vw"
         />
         <div className="absolute inset-0 bg-black bg-opacity-50" />
         <div className="absolute inset-0 flex items-center justify-center">

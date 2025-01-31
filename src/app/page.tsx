@@ -10,23 +10,23 @@ export default function Home() {
 
   const heroImages = [
     {
-      src: "https://source.unsplash.com/random/2000x1200/?warehouse",
+      src: "https://picsum.photos/id/292/2000/1200",
       alt: "Moderno skladište sa organizovanim policama"
     },
     {
-      src: "https://source.unsplash.com/random/2000x1200/?restaurant",
+      src: "https://picsum.photos/id/225/2000/1200",
       alt: "Elegantan enterijer restorana"
     },
     {
-      src: "https://source.unsplash.com/random/2000x1200/?food",
+      src: "https://picsum.photos/id/431/2000/1200",
       alt: "Aranžman svežih namirnica"
     },
     {
-      src: "https://source.unsplash.com/random/2000x1200/?chef",
+      src: "https://picsum.photos/id/425/2000/1200",
       alt: "Profesionalni kuvar u komercijalnoj kuhinji"
     },
     {
-      src: "https://source.unsplash.com/random/2000x1200/?food-factory",
+      src: "https://picsum.photos/id/365/2000/1200",
       alt: "Moderno postrojenje za preradu hrane"
     }
   ];
@@ -41,6 +41,7 @@ export default function Home() {
           fill
           className="object-cover brightness-[0.4] transition-opacity duration-500"
           priority
+          sizes="100vw"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/60" />
         
@@ -92,17 +93,17 @@ export default function Home() {
               {
                 title: 'Premium Kvalitet',
                 description: 'Nabavljeno od proverenih dobavljača širom sveta',
-                image: 'https://source.unsplash.com/random/400x300/?quality-food',
+                image: 'https://picsum.photos/id/493/400/300',
               },
               {
                 title: 'Brza Dostava',
                 description: 'Dostava istog dana za lokalne porudžbine',
-                image: 'https://source.unsplash.com/random/400x300/?delivery',
+                image: 'https://picsum.photos/id/1027/400/300',
               },
               {
                 title: 'Stručna Podrška',
                 description: '24/7 korisnička podrška za naše partnere',
-                image: 'https://source.unsplash.com/random/400x300/?customer-service',
+                image: 'https://picsum.photos/id/1025/400/300',
               },
             ].map((card, index) => (
               <div
@@ -139,19 +140,19 @@ export default function Home() {
             {[
               {
                 title: 'Sveža Riba',
-                image: 'https://source.unsplash.com/random/400x300/?fresh-fish',
+                image: 'https://picsum.photos/id/139/400/300',
               },
               {
                 title: 'Sushi Kvalitet',
-                image: 'https://source.unsplash.com/random/400x300/?sushi',
+                image: 'https://picsum.photos/id/292/400/300',
               },
               {
                 title: 'Morski Plodovi',
-                image: 'https://source.unsplash.com/random/400x300/?seafood',
+                image: 'https://picsum.photos/id/429/400/300',
               },
               {
                 title: 'Specijalni Proizvodi',
-                image: 'https://source.unsplash.com/random/400x300/?specialty-food',
+                image: 'https://picsum.photos/id/365/400/300',
               },
             ].map((category, index) => (
               <Link

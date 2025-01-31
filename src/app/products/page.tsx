@@ -19,7 +19,7 @@ const products: Product[] = [
     name: 'Fresh Atlantic Salmon',
     category: 'Fresh Fish',
     price: 24.99,
-    image: 'https://picsum.photos/id/139/400/300',
+    image: 'https://picsum.photos/id/139/800/600',
     description: 'Premium quality Atlantic salmon, perfect for sushi and grilling.',
   },
   {
@@ -27,7 +27,7 @@ const products: Product[] = [
     name: 'Jumbo Shrimp',
     category: 'Shellfish',
     price: 29.99,
-    image: 'https://picsum.photos/id/140/400/300',
+    image: 'https://picsum.photos/id/429/800/600',
     description: 'Large, succulent shrimp ideal for grilling or seafood dishes.',
   },
   {
@@ -35,7 +35,7 @@ const products: Product[] = [
     name: 'Bluefin Tuna',
     category: 'Sushi Grade',
     price: 39.99,
-    image: 'https://picsum.photos/id/141/400/300',
+    image: 'https://picsum.photos/id/292/800/600',
     description: 'Sushi-grade bluefin tuna, perfect for sashimi and sushi rolls.',
   },
   {
@@ -43,7 +43,7 @@ const products: Product[] = [
     name: 'King Crab Legs',
     category: 'Specialty Items',
     price: 49.99,
-    image: 'https://picsum.photos/id/142/400/300',
+    image: 'https://picsum.photos/id/365/800/600',
     description: 'Premium Alaskan king crab legs, pre-cooked and ready to serve.',
   },
   // Add more products as needed
