@@ -4,21 +4,16 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'images.unsplash.com'
-      },
-      {
-        protocol: 'https',
         hostname: 'source.unsplash.com'
-      },
-      {
-        protocol: 'https',
-        hostname: 'picsum.photos'
       }
     ]
   },
   output: 'standalone',
   env: {
     NEXT_PUBLIC_SITE_URL: 'https://primaventa.rs'
+  },
+  experimental: {
+    optimizeCss: true
   },
   async headers() {
     return [
