@@ -3,6 +3,21 @@
 import { useState } from 'react'
 import Image from 'next/image'
 import { Filter, ChevronDown } from 'lucide-react'
+import { motion, AnimatePresence } from 'framer-motion'
+
+const fadeInUp = {
+  initial: { opacity: 0, y: 20 },
+  animate: { opacity: 1, y: 0 },
+  exit: { opacity: 0, y: 20 }
+};
+
+const staggerChildren = {
+  animate: {
+    transition: {
+      staggerChildren: 0.1
+    }
+  }
+};
 
 type Product = {
   id: number
@@ -53,84 +68,117 @@ const categories = ['All', 'Fresh Fish', 'Shellfish', 'Sushi Grade', 'Specialty 
 
 export default function ProductsPage() {
   const [selectedCategory, setSelectedCategory] = useState('All')
-  const [isMobileFiltersOpen, setIsMobileFiltersOpen] = useState(false)
+  const [showFilters, setShowFilters] = useState(false)
 
   const filteredProducts = products.filter(
-    (product) => selectedCategory === 'All' || product.category === selectedCategory
+    (product) =>
+      selectedCategory === 'All' || product.category === selectedCategory
   )
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8">
-        <div className="flex flex-col md:flex-row gap-8">
-          {/* Sidebar Filters */}
-          <div className="w-full md:w-64">
-            <div className="sticky top-24">
-              <div className="flex items-center justify-between md:justify-start mb-4">
-                <h2 className="text-lg font-semibold text-gray-900">Filters</h2>
-                <button
-                  className="md:hidden flex items-center text-gray-600"
-                  onClick={() => setIsMobileFiltersOpen(!isMobileFiltersOpen)}
-                >
-                  <Filter className="h-5 w-5 mr-1" />
-                  <ChevronDown className="h-4 w-4" />
-                </button>
+    <div className="min-h-screen bg-neutral-light py-12">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <motion.div 
+          className="mb-8 text-center"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+        >
+          <h1 className="text-4xl font-bold text-primary">Our Products</h1>
+          <p className="mt-2 text-secondary-dark">
+            Discover our premium selection of seafood products
+          </p>
+        </motion.div>
+
+        <div className="flex flex-col gap-8 lg:flex-row">
+          {/* Filters */}
+          <motion.div 
+            className="lg:w-64"
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+          >
+            <div className="rounded-lg bg-white p-6 shadow-md">
+              <div className="mb-4 flex items-center justify-between">
+                <h2 className="text-lg font-semibold text-primary">Filters</h2>
+                <Filter className="h-5 w-5 text-secondary" />
               </div>
 
-              <div className={`${isMobileFiltersOpen ? 'block' : 'hidden'} md:block`}>
-                <div className="space-y-2">
-                  {categories.map((category) => (
-                    <button
-                      key={category}
-                      onClick={() => setSelectedCategory(category)}
-                      className={`w-full text-left px-4 py-2 rounded-md ${
-                        selectedCategory === category
-                          ? 'bg-[#D32F2F] text-white'
-                          : 'text-gray-600 hover:bg-gray-100'
-                      }`}
-                    >
-                      {category}
-                    </button>
-                  ))}
-                </div>
+              <div className="space-y-2">
+                {categories.map((category) => (
+                  <motion.button
+                    key={category}
+                    onClick={() => setSelectedCategory(category)}
+                    className={`w-full rounded-md px-4 py-2 text-left transition-all duration-200 ${
+                      selectedCategory === category
+                        ? 'bg-primary text-white'
+                        : 'text-secondary-dark hover:bg-neutral'
+                    }`}
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                  >
+                    {category}
+                  </motion.button>
+                ))}
               </div>
             </div>
-          </div>
+          </motion.div>
 
           {/* Product Grid */}
-          <div className="flex-1">
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-              {filteredProducts.map((product) => (
-                <div
-                  key={product.id}
-                  className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow"
-                >
-                  <div className="relative h-48">
-                    <Image
-                      src={product.image}
-                      alt={product.name}
-                      fill
-                      className="object-cover"
-                    />
-                  </div>
-                  <div className="p-4">
-                    <h3 className="text-lg font-semibold text-gray-900 mb-1">
-                      {product.name}
-                    </h3>
-                    <p className="text-gray-600 text-sm mb-2">{product.description}</p>
-                    <div className="flex items-center justify-between">
-                      <span className="text-[#D32F2F] font-semibold">
-                        ${product.price.toFixed(2)}
-                      </span>
-                      <button className="bg-[#D32F2F] text-white px-4 py-2 rounded-md hover:bg-[#B71C1C] transition-colors">
-                        Add to Cart
-                      </button>
+          <motion.div 
+            className="flex-1"
+            initial="initial"
+            animate="animate"
+            variants={staggerChildren}
+          >
+            <AnimatePresence mode="wait">
+              <motion.div 
+                key={selectedCategory}
+                className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.3 }}
+              >
+                {filteredProducts.map((product) => (
+                  <motion.div
+                    key={product.id}
+                    className="group overflow-hidden rounded-lg bg-white shadow-md transition-all duration-300 hover:shadow-xl"
+                    variants={fadeInUp}
+                    whileHover={{ y: -5 }}
+                  >
+                    <div className="relative h-48 overflow-hidden">
+                      <Image
+                        src={product.image}
+                        alt={product.name}
+                        fill
+                        className="object-cover transition-transform duration-500 group-hover:scale-110"
+                      />
+                      <div className="absolute inset-0 bg-primary opacity-0 transition-opacity duration-300 group-hover:opacity-10" />
                     </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
+                    <div className="p-4">
+                      <h3 className="mb-1 text-lg font-semibold text-primary">
+                        {product.name}
+                      </h3>
+                      <p className="mb-2 text-sm text-secondary-dark">{product.description}</p>
+                      <div className="flex items-center justify-between">
+                        <span className="text-accent font-semibold">
+                          ${product.price.toFixed(2)}
+                        </span>
+                        <motion.button 
+                          className="rounded-md bg-primary px-4 py-2 text-white transition-all duration-300 hover:bg-primary-light hover:shadow-lg"
+                          whileHover={{ scale: 1.05 }}
+                          whileTap={{ scale: 0.95 }}
+                        >
+                          Add to Cart
+                        </motion.button>
+                      </div>
+                    </div>
+                  </motion.div>
+                ))}
+              </motion.div>
+            </AnimatePresence>
+          </motion.div>
         </div>
       </div>
     </div>

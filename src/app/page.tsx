@@ -4,6 +4,21 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, Fish } from "lucide-react";
 import { useState } from "react";
+import { motion } from "framer-motion";
+
+const fadeInUp = {
+  initial: { opacity: 0, y: 20 },
+  animate: { opacity: 1, y: 0 },
+  transition: { duration: 0.5 }
+};
+
+const staggerChildren = {
+  animate: {
+    transition: {
+      staggerChildren: 0.1
+    }
+  }
+};
 
 export default function Home() {
   const [selectedImage, setSelectedImage] = useState(0);
@@ -39,55 +54,84 @@ export default function Home() {
           src={heroImages[selectedImage].src}
           alt={heroImages[selectedImage].alt}
           fill
-          className="object-cover brightness-[0.4] transition-opacity duration-500"
+          className="object-cover brightness-[0.4] transition-all duration-700"
           priority
           sizes="100vw"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/60" />
+        <div className="absolute inset-0 bg-gradient-to-b from-primary/60 via-primary/40 to-primary/60" />
         
         {/* Image Selection Buttons */}
         <div className="absolute bottom-4 left-1/2 z-10 flex -translate-x-1/2 gap-2">
           {heroImages.map((_, index) => (
-            <button
+            <motion.button
               key={index}
               onClick={() => setSelectedImage(index)}
-              className={`h-2 w-8 rounded-full transition-colors ${
-                selectedImage === index ? 'bg-[#C5A572]' : 'bg-white/50 hover:bg-white'
+              className={`h-2 w-8 rounded-full transition-all duration-300 ${
+                selectedImage === index ? 'bg-accent scale-110' : 'bg-white/50 hover:bg-white'
               }`}
+              whileTap={{ scale: 0.95 }}
               aria-label={`Izaberi sliku ${index + 1}`}
             />
           ))}
         </div>
 
         <div className="absolute inset-0 flex items-center justify-center">
-          <div className="text-center text-white">
-            <div className="mb-6 flex items-center justify-center">
-              <Fish className="mr-2 h-12 w-12 text-[#C5A572]" />
+          <motion.div 
+            className="text-center text-white"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+          >
+            <motion.div 
+              className="mb-6 flex items-center justify-center"
+              whileHover={{ scale: 1.05 }}
+              transition={{ type: "spring", stiffness: 300 }}
+            >
+              <Fish className="mr-2 h-12 w-12 text-accent" />
               <h1 className="text-6xl font-bold tracking-tight">
-                <span className="text-[#C5A572]">Prima</span>
+                <span className="text-accent">Prima</span>
                 <span className="text-white">venta</span>
               </h1>
-            </div>
-            <p className="mb-8 text-xl font-light tracking-wide text-[#E5E5E5]">
-              Premium Distribucija Hrane za HORECA i Maloprodaju
-            </p>
-            <Link
-              href="/products"
-              className="inline-flex items-center rounded-md bg-[#1B365D] px-6 py-3 text-lg font-semibold text-white transition-colors hover:bg-[#C5A572]"
+            </motion.div>
+            <motion.p 
+              className="mb-8 text-xl font-light tracking-wide text-neutral"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.4 }}
             >
-              Pregledajte Naše Proizvode
-              <ArrowRight className="ml-2 h-5 w-5" />
-            </Link>
-          </div>
+              Premium Distribucija Hrane za HORECA i Maloprodaju
+            </motion.p>
+            <motion.div
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <Link
+                href="/products"
+                className="inline-flex items-center rounded-md bg-primary px-6 py-3 text-lg font-semibold text-white transition-all duration-300 hover:bg-accent hover:shadow-lg"
+              >
+                Pregledajte Naše Proizvode
+                <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
+              </Link>
+            </motion.div>
+          </motion.div>
         </div>
       </section>
 
       {/* HORECA Supplier Cards */}
-      <section className="py-16">
+      <motion.section 
+        className="py-16"
+        initial="initial"
+        whileInView="animate"
+        viewport={{ once: true }}
+        variants={staggerChildren}
+      >
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <h2 className="mb-12 text-center text-3xl font-bold text-gray-900">
+          <motion.h2 
+            className="mb-12 text-center text-3xl font-bold text-primary"
+            variants={fadeInUp}
+          >
             Zašto Izabrati Primaventu?
-          </h2>
+          </motion.h2>
           <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
             {[
               {
@@ -106,36 +150,47 @@ export default function Home() {
                 image: 'https://picsum.photos/id/1025/400/300',
               },
             ].map((card, index) => (
-              <div
+              <motion.div
                 key={index}
-                className="overflow-hidden rounded-lg bg-white shadow-lg"
+                className="overflow-hidden rounded-lg bg-white shadow-lg transition-all duration-300 hover:shadow-xl"
+                variants={fadeInUp}
+                whileHover={{ y: -10 }}
               >
                 <div className="relative h-48">
                   <Image
                     src={card.image}
                     alt={card.title}
                     fill
-                    className="object-cover"
+                    className="object-cover transition-transform duration-300 hover:scale-110"
                   />
                 </div>
                 <div className="p-6">
-                  <h3 className="mb-2 text-xl font-semibold text-gray-900">
+                  <h3 className="mb-2 text-xl font-semibold text-primary">
                     {card.title}
                   </h3>
-                  <p className="text-gray-600">{card.description}</p>
+                  <p className="text-secondary-dark">{card.description}</p>
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>
-      </section>
+      </motion.section>
 
       {/* Product Categories */}
-      <section className="bg-gray-50 py-16">
+      <motion.section 
+        className="bg-neutral-light py-16"
+        initial="initial"
+        whileInView="animate"
+        viewport={{ once: true }}
+        variants={staggerChildren}
+      >
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <h2 className="mb-12 text-center text-3xl font-bold text-gray-900">
+          <motion.h2 
+            className="mb-12 text-center text-3xl font-bold text-primary"
+            variants={fadeInUp}
+          >
             Naše Kategorije Proizvoda
-          </h2>
+          </motion.h2>
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {[
               {
@@ -155,54 +210,80 @@ export default function Home() {
                 image: 'https://picsum.photos/id/365/400/300',
               },
             ].map((category, index) => (
-              <Link
+              <motion.div
                 key={index}
-                href="/products"
-                className="group overflow-hidden rounded-lg bg-white shadow-md transition-transform hover:scale-105 hover:bg-[#C5A572] hover:text-white"
+                variants={fadeInUp}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
               >
-                <div className="relative h-48">
-                  <Image
-                    src={category.image}
-                    alt={category.title}
-                    fill
-                    className="object-cover transition-transform group-hover:scale-110"
-                  />
-                </div>
-                <div className="p-4">
-                  <h3 className="text-center text-lg font-semibold text-gray-900 group-hover:text-white">
-                    {category.title}
-                  </h3>
-                </div>
-              </Link>
+                <Link
+                  href="/products"
+                  className="group block overflow-hidden rounded-lg bg-white shadow-md transition-all duration-300 hover:shadow-xl hover:bg-accent hover:text-white"
+                >
+                  <div className="relative h-48 overflow-hidden">
+                    <Image
+                      src={category.image}
+                      alt={category.title}
+                      fill
+                      className="object-cover transition-transform duration-500 group-hover:scale-110"
+                    />
+                    <div className="absolute inset-0 bg-primary opacity-0 transition-opacity duration-300 group-hover:opacity-20" />
+                  </div>
+                  <div className="p-4">
+                    <h3 className="text-center text-lg font-semibold text-primary transition-colors duration-300 group-hover:text-white">
+                      {category.title}
+                    </h3>
+                  </div>
+                </Link>
+              </motion.div>
             ))}
           </div>
         </div>
-      </section>
+      </motion.section>
 
       {/* Newsletter Section */}
-      <section className="bg-[#1B365D] py-16 text-white">
+      <motion.section 
+        className="bg-primary py-16 text-white"
+        initial="initial"
+        whileInView="animate"
+        viewport={{ once: true }}
+        variants={staggerChildren}
+      >
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="text-center">
-            <h2 className="mb-4 text-3xl font-bold">Ostanite u Toku</h2>
-            <p className="mb-8">
+            <motion.h2 
+              className="mb-4 text-3xl font-bold"
+              variants={fadeInUp}
+            >
+              Ostanite u Toku
+            </motion.h2>
+            <motion.p 
+              className="mb-8 text-neutral"
+              variants={fadeInUp}
+            >
               Pretplatite se na naš bilten za najnovije proizvode i ponude
-            </p>
-            <form className="mx-auto flex max-w-md flex-col gap-4 sm:flex-row">
+            </motion.p>
+            <motion.form 
+              className="mx-auto flex max-w-md flex-col gap-4 sm:flex-row"
+              variants={fadeInUp}
+            >
               <input
                 type="email"
                 placeholder="Unesite vašu email adresu"
-                className="flex-grow rounded-md px-4 py-2 text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#C5A572]"
+                className="flex-grow rounded-md px-4 py-2 text-primary transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 focus:ring-offset-primary"
               />
-              <button
+              <motion.button
                 type="submit"
-                className="rounded-md bg-[#7C9082] px-6 py-2 font-semibold text-white transition-colors hover:bg-[#C5A572]"
+                className="rounded-md bg-secondary px-6 py-2 font-semibold text-white transition-all duration-300 hover:bg-accent hover:shadow-lg"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
               >
                 Pretplatite se
-              </button>
-            </form>
+              </motion.button>
+            </motion.form>
           </div>
         </div>
-      </section>
+      </motion.section>
     </div>
   );
 }
