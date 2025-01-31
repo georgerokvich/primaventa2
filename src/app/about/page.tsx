@@ -1,58 +1,75 @@
+'use client'
+
 import Image from 'next/image'
+import { motion } from 'framer-motion'
+
+const fadeInUp = {
+  initial: { opacity: 0, y: 20 },
+  animate: { opacity: 1, y: 0 },
+  transition: { duration: 0.5 }
+};
+
+const staggerChildren = {
+  animate: {
+    transition: {
+      staggerChildren: 0.1
+    }
+  }
+};
 
 const timeline = [
   {
     year: '2010',
-    title: 'Company Founded',
+    title: 'Osnivanje Kompanije',
     description:
-      'Primaventa was established with a vision to provide premium quality seafood to restaurants and retailers.',
+      'Primaventa je osnovana sa vizijom da pruži premium kvalitet morskih plodova restoranima i maloprodaji.',
   },
   {
     year: '2015',
-    title: 'National Expansion',
+    title: 'Nacionalno Širenje',
     description:
-      'Expanded operations nationwide, serving major cities across the country.',
+      'Proširili smo poslovanje na nacionalnom nivou, služeći velike gradove širom zemlje.',
   },
   {
     year: '2018',
-    title: 'Sustainability Initiative',
+    title: 'Inicijativa za Održivost',
     description:
-      'Launched our sustainability program, ensuring responsible sourcing practices.',
+      'Pokrenuli smo program održivosti, osiguravajući odgovorne prakse nabavke.',
   },
   {
     year: '2023',
-    title: 'Digital Transformation',
+    title: 'Digitalna Transformacija',
     description:
-      'Implemented state-of-the-art digital solutions for seamless ordering and delivery.',
+      'Implementirali smo najsavremenija digitalna rešenja za besprekorno naručivanje i isporuku.',
   },
 ]
 
 const team = [
   {
-    name: 'John Smith',
-    role: 'CEO & Founder',
+    name: 'Marko Petrović',
+    role: 'Generalni Direktor',
     image: 'https://picsum.photos/id/1025/400/400',
-    bio: 'With over 20 years in the food industry, John leads our vision for excellence.',
+    bio: 'Sa preko 20 godina iskustva u prehrambenoj industriji, Marko vodi našu viziju ka izvrsnosti.',
   },
   {
-    name: 'Sarah Johnson',
-    role: 'Operations Director',
+    name: 'Ana Jovanović',
+    role: 'Direktor Operacija',
     image: 'https://picsum.photos/id/1027/400/400',
-    bio: 'Sarah ensures smooth operations and maintains our high quality standards.',
+    bio: 'Ana osigurava besprekorno poslovanje i održava naše visoke standarde kvaliteta.',
   },
   {
-    name: 'Michael Chen',
-    role: 'Head of Sourcing',
+    name: 'Nikola Đorđević',
+    role: 'Šef Nabavke',
     image: 'https://picsum.photos/id/1074/400/400',
-    bio: 'Michael builds relationships with suppliers worldwide to bring you the best products.',
+    bio: 'Nikola gradi odnose sa dobavljačima širom sveta kako bi vam doneo najbolje proizvode.',
   },
 ]
 
 const stats = [
-  { label: 'Years of Experience', value: '13+' },
-  { label: 'Products', value: '500+' },
-  { label: 'Satisfied Clients', value: '1000+' },
-  { label: 'Cities Served', value: '50+' },
+  { label: 'Godine Iskustva', value: '13+' },
+  { label: 'Proizvoda', value: '500+' },
+  { label: 'Zadovoljnih Klijenata', value: '1000+' },
+  { label: 'Gradova', value: '50+' },
 ]
 
 export default function AboutPage() {
@@ -62,113 +79,158 @@ export default function AboutPage() {
       <section className="relative h-[400px] w-full">
         <Image
           src="https://picsum.photos/id/425/1920/1080"
-          alt="About Primaventa"
+          alt="O Primaventi"
           fill
-          className="object-cover"
+          className="object-cover brightness-75"
           priority
           sizes="100vw"
         />
-        <div className="absolute inset-0 bg-black bg-opacity-50" />
-        <div className="absolute inset-0 flex items-center justify-center">
+        <div className="absolute inset-0 bg-gradient-to-b from-primary/60 via-primary/40 to-primary/60" />
+        <motion.div 
+          className="absolute inset-0 flex items-center justify-center"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+        >
           <div className="text-center text-white">
-            <h1 className="mb-4 text-5xl font-bold">About Us</h1>
-            <p className="text-xl">Delivering Quality Since 2010</p>
+            <h1 className="mb-4 text-5xl font-bold">O Nama</h1>
+            <p className="text-xl text-neutral">Isporučujemo Kvalitet od 2010</p>
           </div>
-        </div>
+        </motion.div>
       </section>
 
-      {/* Mission & Vision */}
-      <section className="py-16">
+      {/* Stats Section */}
+      <motion.section 
+        className="bg-neutral-light py-12"
+        initial="initial"
+        whileInView="animate"
+        viewport={{ once: true }}
+        variants={staggerChildren}
+      >
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="grid gap-8 md:grid-cols-2">
-            <div>
-              <h2 className="mb-4 text-3xl font-bold text-gray-900">Our Mission</h2>
-              <p className="text-gray-600">
-                To provide the highest quality seafood products while maintaining sustainable
-                practices and supporting local communities. We strive to be the most trusted
-                partner for our customers in the food service industry.
-              </p>
-            </div>
-            <div>
-              <h2 className="mb-4 text-3xl font-bold text-gray-900">Our Vision</h2>
-              <p className="text-gray-600">
-                To become the leading sustainable seafood distributor, known for our
-                commitment to quality, innovation, and environmental responsibility. We aim
-                to set industry standards for excellence and sustainability.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Timeline */}
-      <section className="bg-gray-50 py-16">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <h2 className="mb-12 text-center text-3xl font-bold text-gray-900">
-            Our Journey
-          </h2>
-          <div className="space-y-8">
-            {timeline.map((item, index) => (
-              <div
-                key={item.year}
-                className="flex flex-col md:flex-row md:items-center md:space-x-8"
+          <div className="grid grid-cols-2 gap-8 md:grid-cols-4">
+            {stats.map((stat, index) => (
+              <motion.div 
+                key={stat.label}
+                className="text-center"
+                variants={fadeInUp}
               >
-                <div className="mb-4 md:mb-0 md:w-1/4">
-                  <div className="text-2xl font-bold text-[#D32F2F]">{item.year}</div>
-                </div>
-                <div className="md:w-3/4">
-                  <h3 className="mb-2 text-xl font-semibold text-gray-900">
-                    {item.title}
-                  </h3>
-                  <p className="text-gray-600">{item.description}</p>
-                </div>
-              </div>
+                <div className="text-3xl font-bold text-accent">{stat.value}</div>
+                <div className="mt-2 text-secondary-dark">{stat.label}</div>
+              </motion.div>
             ))}
           </div>
         </div>
-      </section>
+      </motion.section>
+
+      {/* Mission & Vision */}
+      <motion.section 
+        className="py-16"
+        initial="initial"
+        whileInView="animate"
+        viewport={{ once: true }}
+        variants={staggerChildren}
+      >
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="grid gap-8 md:grid-cols-2">
+            <motion.div variants={fadeInUp}>
+              <h2 className="mb-4 text-3xl font-bold text-primary">Naša Misija</h2>
+              <p className="text-secondary-dark">
+                Pružanje najkvalitetnijih morskih plodova uz održavanje održivih praksi i
+                podršku lokalnim zajednicama. Težimo da budemo najpouzdaniji partner našim
+                klijentima u ugostiteljskoj industriji.
+              </p>
+            </motion.div>
+            <motion.div variants={fadeInUp}>
+              <h2 className="mb-4 text-3xl font-bold text-primary">Naša Vizija</h2>
+              <p className="text-secondary-dark">
+                Postati vodeći distributer održivih morskih plodova, poznat po našoj
+                posvećenosti kvalitetu, inovacijama i odgovornosti prema životnoj sredini.
+                Cilj nam je postaviti industrijske standarde za izvrsnost i održivost.
+              </p>
+            </motion.div>
+          </div>
+        </div>
+      </motion.section>
+
+      {/* Timeline */}
+      <motion.section 
+        className="bg-neutral-light py-16"
+        initial="initial"
+        whileInView="animate"
+        viewport={{ once: true }}
+        variants={staggerChildren}
+      >
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <motion.h2 
+            className="mb-12 text-center text-3xl font-bold text-primary"
+            variants={fadeInUp}
+          >
+            Naš Put
+          </motion.h2>
+          <div className="space-y-8">
+            {timeline.map((item, index) => (
+              <motion.div
+                key={item.year}
+                className="flex flex-col md:flex-row md:items-center md:space-x-8"
+                variants={fadeInUp}
+              >
+                <div className="mb-4 md:mb-0 md:w-1/4">
+                  <div className="text-2xl font-bold text-accent">{item.year}</div>
+                </div>
+                <div className="md:w-3/4">
+                  <h3 className="mb-2 text-xl font-semibold text-primary">
+                    {item.title}
+                  </h3>
+                  <p className="text-secondary-dark">{item.description}</p>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </motion.section>
 
       {/* Team */}
-      <section className="py-16">
+      <motion.section 
+        className="py-16"
+        initial="initial"
+        whileInView="animate"
+        viewport={{ once: true }}
+        variants={staggerChildren}
+      >
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <h2 className="mb-12 text-center text-3xl font-bold text-gray-900">
-            Our Leadership Team
-          </h2>
+          <motion.h2 
+            className="mb-12 text-center text-3xl font-bold text-primary"
+            variants={fadeInUp}
+          >
+            Naš Tim
+          </motion.h2>
           <div className="grid gap-8 md:grid-cols-3">
             {team.map((member) => (
-              <div key={member.name} className="text-center">
+              <motion.div 
+                key={member.name} 
+                className="text-center"
+                variants={fadeInUp}
+                whileHover={{ y: -10 }}
+              >
                 <div className="relative mx-auto mb-4 h-48 w-48 overflow-hidden rounded-full">
                   <Image
                     src={member.image}
                     alt={member.name}
                     fill
-                    className="object-cover"
+                    className="object-cover transition-transform duration-300 hover:scale-110"
                   />
                 </div>
-                <h3 className="mb-1 text-xl font-semibold text-gray-900">
+                <h3 className="mb-1 text-xl font-semibold text-primary">
                   {member.name}
                 </h3>
-                <p className="mb-2 text-[#D32F2F]">{member.role}</p>
-                <p className="text-gray-600">{member.bio}</p>
-              </div>
+                <p className="mb-2 text-accent">{member.role}</p>
+                <p className="text-secondary-dark">{member.bio}</p>
+              </motion.div>
             ))}
           </div>
         </div>
-      </section>
-
-      {/* Stats */}
-      <section className="bg-[#D32F2F] py-16 text-white">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-2 gap-8 md:grid-cols-4">
-            {stats.map((stat) => (
-              <div key={stat.label} className="text-center">
-                <div className="text-4xl font-bold">{stat.value}</div>
-                <div className="mt-2">{stat.label}</div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      </motion.section>
     </div>
   )
 } 

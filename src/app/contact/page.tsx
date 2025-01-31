@@ -1,210 +1,248 @@
 'use client'
 
 import { useState } from 'react'
-import { Mail, Phone, MapPin, ChevronDown, ChevronUp } from 'lucide-react'
+import { ChevronDown, ChevronUp, Mail, MapPin, Phone } from 'lucide-react'
+import { motion } from 'framer-motion'
+
+const fadeInUp = {
+  initial: { opacity: 0, y: 20 },
+  animate: { opacity: 1, y: 0 },
+  transition: { duration: 0.5 }
+};
+
+const staggerChildren = {
+  animate: {
+    transition: {
+      staggerChildren: 0.1
+    }
+  }
+};
 
 const faqs = [
   {
-    question: 'What are your delivery areas?',
-    answer:
-      'We currently deliver to all major cities nationwide. Contact us for specific delivery information in your area.',
+    question: 'Koji je minimalni iznos porudžbine?',
+    answer: 'Minimalni iznos porudžbine je 10.000 RSD za dostavu u Beogradu, i 20.000 RSD za dostavu van Beograda.',
   },
   {
-    question: 'What are your minimum order quantities?',
-    answer:
-      'Minimum order quantities vary by product type and delivery location. Please contact our sales team for detailed information.',
+    question: 'Koliko vremena je potrebno za dostavu?',
+    answer: 'Dostavljamo istog dana za porudžbine u Beogradu primljene do 14h. Za ostale lokacije, vreme dostave je 24-48h.',
   },
   {
-    question: 'How do I place a bulk order?',
-    answer:
-      'For bulk orders, please fill out our contact form or call us directly. Our team will assist you with special pricing and delivery arrangements.',
+    question: 'Da li imate posebne uslove za restorane?',
+    answer: 'Da, nudimo posebne pogodnosti za HORECA partnere, uključujući prilagođene cene i prioritetnu dostavu.',
   },
   {
-    question: 'What are your payment terms?',
-    answer:
-      'We offer various payment options including credit cards and net terms for qualified business customers.',
+    question: 'Kako mogu da postanem vaš partner?',
+    answer: 'Kontaktirajte nas putem forme ispod ili nas pozovite. Naš tim će vam predstaviti sve mogućnosti saradnje.',
   },
 ]
 
 export default function ContactPage() {
   const [openFaq, setOpenFaq] = useState<number | null>(null)
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    phone: '',
-    message: '',
-  })
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-    // Handle form submission
-    console.log('Form submitted:', formData)
-  }
-
-  const handleInputChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    const { name, value } = e.target
-    setFormData((prev) => ({ ...prev, [name]: value }))
-  }
 
   return (
     <div className="bg-white">
       {/* Hero Section */}
-      <section className="bg-[#D32F2F] py-16 text-white">
+      <motion.section 
+        className="bg-primary py-16 text-white"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.8 }}
+      >
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <h1 className="text-center text-4xl font-bold">Contact Us</h1>
-          <p className="mt-4 text-center text-xl">
-            We're here to help with any questions you may have
-          </p>
-        </div>
-      </section>
-
-      {/* Contact Information Cards */}
-      <section className="py-16">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="grid gap-8 md:grid-cols-3">
-            <div className="rounded-lg bg-gray-50 p-8 text-center">
-              <Phone className="mx-auto mb-4 h-8 w-8 text-[#D32F2F]" />
-              <h3 className="mb-2 text-xl font-semibold">Phone</h3>
-              <p className="text-gray-600">(555) 123-4567</p>
-            </div>
-            <div className="rounded-lg bg-gray-50 p-8 text-center">
-              <Mail className="mx-auto mb-4 h-8 w-8 text-[#D32F2F]" />
-              <h3 className="mb-2 text-xl font-semibold">Email</h3>
-              <p className="text-gray-600">info@primaventa.com</p>
-            </div>
-            <div className="rounded-lg bg-gray-50 p-8 text-center">
-              <MapPin className="mx-auto mb-4 h-8 w-8 text-[#D32F2F]" />
-              <h3 className="mb-2 text-xl font-semibold">Address</h3>
-              <p className="text-gray-600">123 Distribution Street</p>
-              <p className="text-gray-600">City, State 12345</p>
-            </div>
+          <div className="text-center">
+            <motion.h1 
+              className="text-4xl font-bold"
+              initial={{ y: 20, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ delay: 0.2 }}
+            >
+              Kontaktirajte Nas
+            </motion.h1>
+            <motion.p 
+              className="mt-4 text-neutral"
+              initial={{ y: 20, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ delay: 0.3 }}
+            >
+              Tu smo da odgovorimo na sva vaša pitanja
+            </motion.p>
           </div>
         </div>
-      </section>
+      </motion.section>
 
-      {/* Contact Form and Map */}
-      <section className="bg-gray-50 py-16">
+      {/* Contact Info & Form */}
+      <section className="py-16">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="grid gap-8 md:grid-cols-2">
+          <div className="grid gap-8 lg:grid-cols-2">
+            {/* Contact Information */}
+            <motion.div 
+              className="space-y-8"
+              initial="initial"
+              whileInView="animate"
+              viewport={{ once: true }}
+              variants={staggerChildren}
+            >
+              <motion.div variants={fadeInUp}>
+                <h2 className="text-2xl font-bold text-primary">Informacije za Kontakt</h2>
+                <p className="mt-4 text-secondary-dark">
+                  Izaberite način koji vam najviše odgovara da stupite u kontakt sa nama.
+                </p>
+              </motion.div>
+
+              <motion.div 
+                className="rounded-lg bg-neutral-light p-6"
+                variants={fadeInUp}
+              >
+                <div className="flex items-center">
+                  <Phone className="h-6 w-6 text-accent" />
+                  <div className="ml-4">
+                    <h3 className="text-lg font-semibold text-primary">Telefon</h3>
+                    <p className="mt-1 text-secondary-dark">+381 11 123 4567</p>
+                  </div>
+                </div>
+              </motion.div>
+
+              <motion.div 
+                className="rounded-lg bg-neutral-light p-6"
+                variants={fadeInUp}
+              >
+                <div className="flex items-center">
+                  <Mail className="h-6 w-6 text-accent" />
+                  <div className="ml-4">
+                    <h3 className="text-lg font-semibold text-primary">Email</h3>
+                    <p className="mt-1 text-secondary-dark">info@primaventa.rs</p>
+                  </div>
+                </div>
+              </motion.div>
+
+              <motion.div 
+                className="rounded-lg bg-neutral-light p-6"
+                variants={fadeInUp}
+              >
+                <div className="flex items-center">
+                  <MapPin className="h-6 w-6 text-accent" />
+                  <div className="ml-4">
+                    <h3 className="text-lg font-semibold text-primary">Adresa</h3>
+                    <p className="mt-1 text-secondary-dark">
+                      Bulevar Mihajla Pupina 10a
+                      <br />
+                      11070 Novi Beograd
+                    </p>
+                  </div>
+                </div>
+              </motion.div>
+            </motion.div>
+
             {/* Contact Form */}
-            <div className="rounded-lg bg-white p-8 shadow-md">
-              <h2 className="mb-6 text-2xl font-bold text-gray-900">Send us a Message</h2>
-              <form onSubmit={handleSubmit} className="space-y-4">
+            <motion.div 
+              className="rounded-lg bg-white p-8 shadow-lg"
+              initial={{ opacity: 0, x: 20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+            >
+              <h2 className="mb-6 text-2xl font-bold text-primary">Pošaljite Nam Poruku</h2>
+              <form className="space-y-6">
                 <div>
-                  <label htmlFor="name" className="mb-1 block text-sm text-gray-600">
-                    Name
+                  <label htmlFor="name" className="block text-sm font-medium text-secondary-dark">
+                    Ime i Prezime
                   </label>
                   <input
                     type="text"
                     id="name"
-                    name="name"
-                    value={formData.name}
-                    onChange={handleInputChange}
-                    className="w-full rounded-md border border-gray-300 px-4 py-2 focus:border-[#D32F2F] focus:outline-none"
-                    required
+                    className="mt-1 block w-full rounded-md border border-neutral px-4 py-2 text-primary transition-colors focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent"
                   />
                 </div>
                 <div>
-                  <label htmlFor="email" className="mb-1 block text-sm text-gray-600">
-                    Email
+                  <label htmlFor="email" className="block text-sm font-medium text-secondary-dark">
+                    Email Adresa
                   </label>
                   <input
                     type="email"
                     id="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleInputChange}
-                    className="w-full rounded-md border border-gray-300 px-4 py-2 focus:border-[#D32F2F] focus:outline-none"
-                    required
+                    className="mt-1 block w-full rounded-md border border-neutral px-4 py-2 text-primary transition-colors focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent"
                   />
                 </div>
                 <div>
-                  <label htmlFor="phone" className="mb-1 block text-sm text-gray-600">
-                    Phone
-                  </label>
-                  <input
-                    type="tel"
-                    id="phone"
-                    name="phone"
-                    value={formData.phone}
-                    onChange={handleInputChange}
-                    className="w-full rounded-md border border-gray-300 px-4 py-2 focus:border-[#D32F2F] focus:outline-none"
-                  />
-                </div>
-                <div>
-                  <label htmlFor="message" className="mb-1 block text-sm text-gray-600">
-                    Message
+                  <label htmlFor="message" className="block text-sm font-medium text-secondary-dark">
+                    Poruka
                   </label>
                   <textarea
                     id="message"
-                    name="message"
-                    value={formData.message}
-                    onChange={handleInputChange}
                     rows={4}
-                    className="w-full rounded-md border border-gray-300 px-4 py-2 focus:border-[#D32F2F] focus:outline-none"
-                    required
-                  />
+                    className="mt-1 block w-full rounded-md border border-neutral px-4 py-2 text-primary transition-colors focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent"
+                  ></textarea>
                 </div>
-                <button
+                <motion.button
                   type="submit"
-                  className="w-full rounded-md bg-[#D32F2F] py-2 text-white transition-colors hover:bg-[#B71C1C]"
+                  className="w-full rounded-md bg-primary px-6 py-3 text-white transition-all duration-300 hover:bg-primary-light hover:shadow-lg"
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
                 >
-                  Send Message
-                </button>
+                  Pošalji Poruku
+                </motion.button>
               </form>
-            </div>
-
-            {/* Map */}
-            <div className="rounded-lg bg-white p-8 shadow-md">
-              <h2 className="mb-6 text-2xl font-bold text-gray-900">Our Location</h2>
-              <div className="relative h-[400px] w-full rounded-lg bg-gray-200">
-                {/* Replace with actual map implementation */}
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <p className="text-gray-500">Map will be displayed here</p>
-                </div>
-              </div>
-            </div>
+            </motion.div>
           </div>
         </div>
       </section>
 
       {/* FAQ Section */}
-      <section className="py-16">
+      <motion.section 
+        className="bg-neutral-light py-16"
+        initial="initial"
+        whileInView="animate"
+        viewport={{ once: true }}
+        variants={staggerChildren}
+      >
         <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
-          <h2 className="mb-8 text-center text-3xl font-bold text-gray-900">
-            Frequently Asked Questions
-          </h2>
+          <motion.h2 
+            className="mb-8 text-center text-3xl font-bold text-primary"
+            variants={fadeInUp}
+          >
+            Često Postavljana Pitanja
+          </motion.h2>
           <div className="space-y-4">
             {faqs.map((faq, index) => (
-              <div
+              <motion.div
                 key={index}
-                className="rounded-lg border border-gray-200"
+                className="overflow-hidden rounded-lg border border-neutral"
+                variants={fadeInUp}
               >
-                <button
-                  className="flex w-full items-center justify-between p-4 text-left"
+                <motion.button
+                  className="flex w-full items-center justify-between p-4 text-left transition-colors hover:bg-neutral-light"
                   onClick={() => setOpenFaq(openFaq === index ? null : index)}
+                  whileHover={{ backgroundColor: 'rgba(229, 229, 229, 0.5)' }}
                 >
-                  <span className="text-lg font-medium text-gray-900">
+                  <span className="text-lg font-medium text-primary">
                     {faq.question}
                   </span>
                   {openFaq === index ? (
-                    <ChevronUp className="h-5 w-5 text-gray-500" />
+                    <ChevronUp className="h-5 w-5 text-secondary" />
                   ) : (
-                    <ChevronDown className="h-5 w-5 text-gray-500" />
+                    <ChevronDown className="h-5 w-5 text-secondary" />
                   )}
-                </button>
-                {openFaq === index && (
-                  <div className="border-t border-gray-200 p-4">
-                    <p className="text-gray-600">{faq.answer}</p>
-                  </div>
-                )}
-              </div>
+                </motion.button>
+                <motion.div
+                  initial={false}
+                  animate={{
+                    height: openFaq === index ? 'auto' : 0,
+                    opacity: openFaq === index ? 1 : 0
+                  }}
+                  transition={{ duration: 0.3 }}
+                >
+                  {openFaq === index && (
+                    <div className="border-t border-neutral bg-white p-4">
+                      <p className="text-secondary-dark">{faq.answer}</p>
+                    </div>
+                  )}
+                </motion.div>
+              </motion.div>
             ))}
           </div>
         </div>
-      </section>
+      </motion.section>
     </div>
   )
 } 
